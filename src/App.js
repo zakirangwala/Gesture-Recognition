@@ -2,7 +2,7 @@ import React, { useRef } from "react";
 import * as tf from "@tensorflow/tfjs";
 import * as handpose from "@tensorflow-models/handpose";
 import Webcam from "react-webcam";
-import {drawHand} from "./utilities.js";
+import { drawHand } from "./utilities.js";
 import "./App.css";
 
 function App() {
@@ -11,7 +11,6 @@ function App() {
 
   const runHandpose = async () => {
     const net = await handpose.load();
-    console.log("Handpose model loaded");
     // detect hands
     setInterval(() => {
       detect(net);
@@ -35,10 +34,9 @@ function App() {
       canvasRef.current.height = videoHeight;
       // detections
       const hand = await net.estimateHands(video);
-      console.log(hand);
       //draw mesh
-      const ctx = canvasRef.current.getContext('2d');
-      drawHand(hand,ctx);
+      const ctx = canvasRef.current.getContext("2d");
+      drawHand(hand, ctx);
     }
   };
 
