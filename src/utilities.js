@@ -7,7 +7,7 @@ const fingerjoints = {
   pinky: [0, 17, 18, 19, 20],
 };
 
-/* // Infinity Gauntlet Style
+// Infinity Gauntlet Style
 const style = {
   0: { color: "yellow", size: 15 },
   1: { color: "gold", size: 6 },
@@ -30,7 +30,7 @@ const style = {
   18: { color: "gold", size: 6 },
   19: { color: "gold", size: 6 },
   20: { color: "gold", size: 6 },
-}; */
+};
 
 // Drawing Function
 export const drawHand = (predictions, ctx) => {
@@ -45,7 +45,7 @@ export const drawHand = (predictions, ctx) => {
           const firstJointIndex = fingerjoints[finger][k];
           const secondJointIndex = fingerjoints[finger][k + 1];
           //draw path
-           ctx.beginPath();
+          ctx.beginPath();
           ctx.moveTo(
             landmarks[firstJointIndex][0],
             landmarks[firstJointIndex][1]
@@ -63,11 +63,9 @@ export const drawHand = (predictions, ctx) => {
         const x = landmarks[i][0];
         const y = landmarks[i][1];
         ctx.beginPath();
-        ctx.arc(x, y, 5, 0, 3 * Math.PI);
-        ctx.fillStyle = "indigo";
-        /* //Infinity Gauntlet
+        //Infinity Gauntlet
         ctx.arc(x, y, style[i]["size"], 0, 3 * Math.PI);
-        ctx.fillStyle = style[i]["color"]; */
+        ctx.fillStyle = style[i]["color"];
         ctx.fill();
       }
     });
