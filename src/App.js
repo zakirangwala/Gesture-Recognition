@@ -37,6 +37,7 @@ function App() {
       //draw mesh
       const ctx = canvasRef.current.getContext("2d");
       drawHand(hand, ctx);
+      console.log(tf.nextFrame);
     }
   };
 
