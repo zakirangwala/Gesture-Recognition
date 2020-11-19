@@ -46,7 +46,6 @@ function App() {
           fp.Gestures.ThumbsUpGesture,
         ]);
         const gesture = await GE.estimate(hand[0].landmarks, 7);
-        // console.log(gesture);
         if (gesture.gestures !== undefined && gesture.gestures.length > 0) {
           const confidence = gesture.gestures.map(
             (prediction) => prediction.confidence
@@ -55,7 +54,6 @@ function App() {
             Math.max.apply(null, confidence)
           );
           setEmoji(gesture.gestures[maxConfidence].name);
-          console.log(emoji);
         }
       }
       //draw mesh
@@ -101,6 +99,7 @@ function App() {
         {emoji !== null ? (
           <img
             src={images[emoji]}
+            alt={"emoji"}
             style={{
               position: "absolute",
               marginLeft: "auto",
