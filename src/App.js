@@ -45,8 +45,18 @@ function App() {
           fp.Gestures.VictoryGesture,
           fp.Gestures.ThumbsUpGesture,
         ]);
-        const gesture = await GE.estimate(hand[0].landmarks, 8);
-        console.log(gesture);
+        const gesture = await GE.estimate(hand[0].landmarks, 7);
+        // console.log(gesture);
+        if (gesture.gestures !== undefined && gesture.gestures.length > 0) {
+          const confidence = gesture.gestures.map(
+            (prediction) => prediction.confidence
+          );
+          const maxConfidence = confidence.indexOf(
+            Math.max.apply(null, confidence)
+          );
+          setEmoji(gesture.gestures[maxConfidence].name);
+          console.log(emoji);
+        }
       }
       //draw mesh
       const ctx = canvasRef.current.getContext("2d");
@@ -87,6 +97,24 @@ function App() {
             height: 480,
           }}
         />
+
+        {emoji !== null ? (
+          <img
+            src={images[emoji]}
+            style={{
+              position: "absolute",
+              marginLeft: "auto",
+              marginRight: "auto",
+              left: 400,
+              bottom: 500,
+              right: 0,
+              textAlign: "center",
+              height: 100,
+            }}
+          />
+        ) : (
+          ""
+        )}
       </header>
     </div>
   );
