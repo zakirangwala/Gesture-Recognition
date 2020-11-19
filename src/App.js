@@ -11,6 +11,8 @@ import "./App.css";
 function App() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
+  const [emoji, setEmoji] = useState(null);
+  const images = { thumbs_up: thumbs_up, victory: victory };
 
   const runHandpose = async () => {
     const net = await handpose.load();
@@ -35,12 +37,20 @@ function App() {
       webcamRef.current.video.height = videoHeight;
       canvasRef.current.width = videoWidth;
       canvasRef.current.height = videoHeight;
-      // detections
+      // handpose detections
       const hand = await net.estimateHands(video);
+      // gesture detections
+      if (hand.length > 0) {
+        const GE = new fp.GestureEstimator([
+          fp.Gestures.VictoryGesture,
+          fp.Gestures.ThumbsUpGesture,
+        ]);
+        const gesture = await GE.estimate(hand[0].landmarks, 8);
+        console.log(gesture);
+      }
       //draw mesh
       const ctx = canvasRef.current.getContext("2d");
       drawHand(hand, ctx);
-      console.log(tf.nextFrame);
     }
   };
 
