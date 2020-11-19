@@ -1,8 +1,11 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import * as tf from "@tensorflow/tfjs";
 import * as handpose from "@tensorflow-models/handpose";
 import Webcam from "react-webcam";
 import { drawHand } from "./utilities.js";
+import * as fp from "fingerpose";
+import victory from "./victory.png";
+import thumbs_up from "./thumbs_up.png";
 import "./App.css";
 
 function App() {
